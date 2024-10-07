@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background-color: rgba(245, 245, 245, 0.874);
+}
+
+
+.scrollbar-container {
+    position: relative;
+  }
+  
+  .scrollbar-container::-webkit-scrollbar {
+    display: none; /* Standart scrollbarı gizle */
+  }
+  
+  .scrollbar-container:before {
+    content: '';
+    position: absolute;
+    top: 0; /* Yukarı taşıyoruz */
+    left: 0;
+    right: 0;
+    height: 16px; /* Scrollbar yüksekliği */
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  
+  .scrollbar-content {
+    overflow-y: scroll;
+    margin-top: 16px; /* Scrollbar ile içerik arasında boşluk */
+  }
+  
