@@ -1,5 +1,4 @@
 import { AddService, DeleteService, GetAllService, SearchService, UpdateService } from "../ApiService/AssetFetch"
-import { useAppDispatch } from "../StateManager/hooks"
 import { Delete, Insert, InsertOfList, InsertOfListSearch, Update } from "../StateManager/reducer/AssetSlice"
 import store from "../StateManager/store"
 import { destoryModal } from "../Utils/hooks/modal"
@@ -7,10 +6,11 @@ import Asset from "../Utils/Models/ConCreate/Asset"
 import AddAssetRequest from "../Utils/Models/Request/Asset/AddAssetRequest"
 import SearchAssetRequest from "../Utils/Models/Request/Asset/SearchAssetRequest"
 import UpdateAssetRequest from "../Utils/Models/Request/Asset/UpdateAssetRequest"
+import GetAllResponse from "../Utils/Models/Response/Asset/GetAllResponse"
 
 
-const GetAllAssetLogic = () => {
-    GetAllService()
+const GetAllAssetLogic = (uniq:boolean = false) => {
+    GetAllService(uniq)
         .then(rsp => {
             console.log("AllAssetComponent - GetAll", rsp)
             if (rsp.assets !== null) {
@@ -20,7 +20,6 @@ const GetAllAssetLogic = () => {
 }
 
 const SearchAssetLogic = (searchAsset: SearchAssetRequest) => {
-    debugger;
     if (searchAsset.AssetTypeId.trim().length > 0 || searchAsset.match.length > 0)
         SearchService(searchAsset)
             .then(rsp => {

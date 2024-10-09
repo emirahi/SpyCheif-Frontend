@@ -11,9 +11,9 @@ import UpdateResponse from "../Utils/Models/Response/Asset/UpdateResponse";
 
 
 const baseUrl = "http://localhost:5025/api/Asset";
-const GetAllService = async (): Promise<GetAllResponse> => {
-
-    const asset = await fetch(baseUrl)
+const GetAllService = async (uniq:boolean = false): Promise<GetAllResponse> => {
+    const url = `${baseUrl}?uniq=${uniq}`
+    const asset = await fetch(url)
     try {
         const data = await asset.json()
         if (asset.status == 200)

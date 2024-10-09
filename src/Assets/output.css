@@ -658,6 +658,10 @@ video {
   margin-bottom: 0.75rem;
 }
 
+.ml-3 {
+  margin-left: 0.75rem;
+}
+
 .mt-3 {
   margin-top: 0.75rem;
 }
@@ -750,6 +754,10 @@ video {
   min-height: 100vh;
 }
 
+.min-h-\[30vh\] {
+  min-height: 30vh;
+}
+
 .min-h-\[calc\(100vh-100px\)\] {
   min-height: calc(100vh - 100px);
 }
@@ -840,6 +848,10 @@ video {
 
 .min-w-\[50\%\] {
   min-width: 50%;
+}
+
+.min-w-\[50vw\] {
+  min-width: 50vw;
 }
 
 .max-w-\[380px\] {
