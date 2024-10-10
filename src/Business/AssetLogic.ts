@@ -1,4 +1,5 @@
-import { AddService, DeleteService, GetAllService, SearchService, UpdateService } from "../ApiService/AssetFetch"
+import AddResponse from "@/Utils/Models/Response/Asset/AddResponse"
+import AssetFetch from "../ApiService/AssetFetch"
 import { Delete, Insert, InsertOfList, InsertOfListSearch, Update } from "../StateManager/reducer/AssetSlice"
 import store from "../StateManager/store"
 import { destoryModal } from "../Utils/hooks/modal"
@@ -7,10 +8,13 @@ import AddAssetRequest from "../Utils/Models/Request/Asset/AddAssetRequest"
 import SearchAssetRequest from "../Utils/Models/Request/Asset/SearchAssetRequest"
 import UpdateAssetRequest from "../Utils/Models/Request/Asset/UpdateAssetRequest"
 import GetAllResponse from "../Utils/Models/Response/Asset/GetAllResponse"
+import UpdateResponse from "@/Utils/Models/Response/Asset/UpdateResponse"
+import DeleteResponse from "@/Utils/Models/Response/Asset/DeleteResponse"
 
 
+const fetch = new AssetFetch();
 const GetAllAssetLogic = (uniq:boolean = false) => {
-    GetAllService(uniq)
+    fetch.GetAllFetch<GetAllResponse>(uniq)
         .then(rsp => {
             console.log("AllAssetComponent - GetAll", rsp)
             if (rsp.assets !== null) {
@@ -21,7 +25,7 @@ const GetAllAssetLogic = (uniq:boolean = false) => {
 
 const SearchAssetLogic = (searchAsset: SearchAssetRequest) => {
     if (searchAsset.AssetTypeId.trim().length > 0 || searchAsset.match.length > 0)
-        SearchService(searchAsset)
+        fetch.SearchService(searchAsset)
             .then(rsp => {
                 if (rsp.assets !== null)
                     store.dispatch(InsertOfListSearch(rsp.assets))
@@ -34,14 +38,14 @@ const SearchAssetLogic = (searchAsset: SearchAssetRequest) => {
 }
 
 const AddAssetLogic = async (addAsset: AddAssetRequest) => {
-    const resp = await AddService(addAsset)
+    const resp = await fetch.AddFetch<AddResponse,AddAssetRequest>(addAsset)
     if (resp.status) {
         store.dispatch(Insert(resp.asset))
     }
 }
 
 const UpdateAssetLogic = async (assetTypeName: string, updateAsset: UpdateAssetRequest) => {
-    const resp = await UpdateService(updateAsset)
+    const resp = await fetch.UpdateFetch<UpdateResponse,UpdateAssetRequest>(updateAsset)
     if (resp.status) {
         store.dispatch(Update({ id: updateAsset.id, value: updateAsset.value, assetTypeId: updateAsset.id, type: assetTypeName } as Asset))
         destoryModal()
@@ -49,7 +53,7 @@ const UpdateAssetLogic = async (assetTypeName: string, updateAsset: UpdateAssetR
 }
 
 const DeleteAssetLogic = async (id: string) => {
-    const data = await DeleteService(id)
+    const data = await fetch.DeleteFetch<DeleteResponse>(id)
     if (await data.status) {
         store.dispatch(Delete(id))
         destoryModal()

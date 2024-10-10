@@ -1,12 +1,8 @@
 import { FC, FormEvent, useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../../StateManager/hooks"
 import AddAssetRequest from "../../../Utils/Models/Request/Asset/AddAssetRequest"
-import { AddService } from "../../../ApiService/AssetFetch"
-import { Insert } from "../../../StateManager/reducer/AssetSlice"
 import { destoryModal } from "../../../Utils/hooks/modal"
 import { Button, Col, Form, FormLabel, Row } from "react-bootstrap"
-import { GetAllService } from "../../../ApiService/AssetTypeFetch"
-import { InsertOfList } from "../../../StateManager/reducer/AssetTypeSlice"
 import { AddAssetLogic } from "../../../Business/AssetLogic"
 import { GetAllAssetTypeLogic } from "../../../Business/AssetTypeLogic"
 
@@ -14,7 +10,6 @@ export const AssetAddModal: FC<{ modalData: any }> = (modalData) => {
     const [type, setType] = useState<string>("1")
     const [value, setValue] = useState<string>("")
     const assetTypes = useAppSelector(selector => selector.AssetTypeSlice.AssetTypes)
-    const dispatch = useAppDispatch()
 
     useEffect(() => { GetAllAssetTypeLogic() }, [])
 

@@ -1,10 +1,6 @@
 import { FC } from "react";
-import { useAppDispatch } from "../../../StateManager/hooks";
-import { DeleteService } from "../../../ApiService/AssetTypeFetch";
-import { Delete } from "../../../StateManager/reducer/AssetTypeSlice";
 import { destoryModal } from "../../../Utils/hooks/modal";
 import { Button } from "react-bootstrap";
-import { DeleteOfType } from "../../../StateManager/reducer/AssetSlice";
 import { DeleteAssetTypeLogic } from "../../../Business/AssetTypeLogic";
 
 export const AssetTypeDeleteModal: FC<{ modalData: any }> = ({ modalData }) => {

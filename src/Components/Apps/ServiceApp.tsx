@@ -42,7 +42,6 @@ export const ServiceApp: FC = () => {
                                     <button key={index} className="flex justify-between items-center" onClick={() => {
                                         setAppName(serviceDatabase.appName)
                                         GetAllTransferLogic(serviceDatabase.appName)
-                                        setTimeout(() => console.clear(), 200)
                                     }}>
                                         {serviceDatabase.appName}
                                         <span className="flex items-center gap-2">

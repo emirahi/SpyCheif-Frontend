@@ -1,13 +1,7 @@
 import { FC, FormEvent, useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../../StateManager/hooks"
-import { UpdateService } from "../../../ApiService/AssetFetch"
 import UpdateAssetRequest from "../../../Utils/Models/Request/Asset/UpdateAssetRequest"
-import { Update } from "../../../StateManager/reducer/AssetSlice"
-import { destoryModal } from "../../../Utils/hooks/modal"
 import { Button, Col, Form, FormLabel, Row } from "react-bootstrap"
-import Asset from "../../../Utils/Models/ConCreate/Asset"
-import { GetAllService } from "../../../ApiService/AssetTypeFetch"
-import { InsertOfList } from "../../../StateManager/reducer/AssetTypeSlice"
 import { GetAllAssetTypeLogic } from "../../../Business/AssetTypeLogic"
 import { UpdateAssetLogic } from "../../../Business/AssetLogic"
 
@@ -19,9 +13,6 @@ export const AssetUpdateModal: FC<{ modalData: any }> = ({ modalData }) => {
     const assetType = useAppSelector(selector => selector.AssetTypeSlice.AssetTypes.find(x => x.id === type))
 
     useEffect(() => { GetAllAssetTypeLogic() }, [])
-
-    // useEffect(() => { console.log("type : ", type, "object type :", assetType);console.log(modalData);
-    //  },[assetType])
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()

@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler } from "react";
+import { FC } from "react";
 import { Button } from "react-bootstrap";
 import { destoryModal } from "../../../Utils/hooks/modal";
 import { DeleteServiceDatabaseLogic } from "../../../Business/ServiceDatabaseLogic";
