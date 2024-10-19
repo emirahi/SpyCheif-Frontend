@@ -1,3 +1,4 @@
+import { ProjectAddModal } from "../../Components/Modal/Project/ProjectAddModal"
 import { AssetAddModal } from "../../Components/Modal/Asset/AssetAddModal"
 import { AssetDeleteModal } from "../../Components/Modal/Asset/AssetDeleteModal"
 import { AssetUpdateModal } from "../../Components/Modal/Asset/AssetUpdateModal"
@@ -9,6 +10,8 @@ import { ServiceDatabaseAddModal } from "../../Components/Modal/ServiceDatabase/
 import { ServiceDatabaseDeleteModal } from "../../Components/Modal/ServiceDatabase/ServiceDatabaseDeleteModal"
 import { ServiceDatabaseUpdateModal } from "../../Components/Modal/ServiceDatabase/ServiceDatabaseUpdateModal"
 import { TransferCreateModal } from "../../Components/Modal/Transfer/TransferCreateModal"
+import { ProjectDeleteModal } from "../../Components/Modal/Project/ProjectDeleteModal"
+import { ProjectUpdateModal } from "../../Components/Modal/Project/ProjectUpdateModal"
 
 const modalConfig = [
     {
@@ -54,8 +57,20 @@ const modalConfig = [
     {
         name:"createTransfer",
         element:TransferCreateModal
+    },
+    {
+        name:"addProject",
+        element:ProjectAddModal
+    },
+    {
+        name:"deleteProject",
+        element:ProjectDeleteModal
+    },
+    {
+        name:"updateProject",
+        element:ProjectUpdateModal
     }
-    
 ]
 
 export default modalConfig
+

@@ -13,9 +13,12 @@ export const SearchAssetComponent: FC = () => {
     const [match,setMatch] = useState<string>("")
     const searchAsset = useAppSelector(selector => selector.AssetSlice.Search)
     const assetTypes = useAppSelector(selector => selector.AssetTypeSlice.AssetTypes)
+    const projectId = useAppSelector(selector => selector.ProjectSlice.active?.id)
+    
 
     const handleSearch = () => {
-        SearchAssetLogic({uniq:false,AssetTypeId:typeId,match:match} as SearchAssetRequest)
+        if (projectId)
+            SearchAssetLogic({ProjectId:projectId,uniq:false,AssetTypeId:typeId,match:match} as SearchAssetRequest)
     }
 
     useEffect(() => { GetAllAssetTypeLogic() },[])

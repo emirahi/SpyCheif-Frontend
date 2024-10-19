@@ -10,13 +10,16 @@ export const AssetAddModal: FC<{ modalData: any }> = (modalData) => {
     const [type, setType] = useState<string>("1")
     const [value, setValue] = useState<string>("")
     const assetTypes = useAppSelector(selector => selector.AssetTypeSlice.AssetTypes)
+    const projectId = useAppSelector(selector => selector.ProjectSlice.active?.id)
 
     useEffect(() => { GetAllAssetTypeLogic() }, [])
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        AddAssetLogic({ assetTypeId: type, value: value } as AddAssetRequest)
-        destoryModal()
+        if (projectId){
+            AddAssetLogic({ ProjectId:projectId ,assetTypeId: type, value: value } as AddAssetRequest)
+            destoryModal()
+        }
     }
 
     return (

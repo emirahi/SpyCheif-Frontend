@@ -3,6 +3,7 @@ import { GetAllAssetTypeLogic } from "../../../Business/AssetTypeLogic";
 import { useAppSelector } from "../../../StateManager/hooks";
 import { Button, Form, FormLabel, Table } from "react-bootstrap";
 import { AddAssetLogic } from "../../../Business/AssetLogic";
+import AddAssetRequest from "@/Utils/Models/Request/Asset/AddAssetRequest";
 
 export const TransferCreateModal: FC = () => {
     const [assetTypeId, setAssetTypeId] = useState<string>("")
@@ -10,15 +11,17 @@ export const TransferCreateModal: FC = () => {
     const [count, setCount] = useState<number>(0)
     const assetTypes = useAppSelector(selector => selector.AssetTypeSlice.AssetTypes)
     const transferSelected = useAppSelector(selector => selector.ServiceDatabaseSlice.TransferSelected)
+    const projectId = useAppSelector(selector => selector.ProjectSlice.active?.id)
 
     useEffect(() => { GetAllAssetTypeLogic() })
 
     const handleAddAsset = () => {
-        transferSelected.map((x,index) => {
-            console.log(assetTypeId,x[key],index)
-            AddAssetLogic({assetTypeId,value:x[key]})
-            setCount(index+1)
-        })
+        if (projectId)
+            transferSelected.map((x, index) => {
+                console.log(assetTypeId, x[key], index)
+                AddAssetLogic({ ProjectId: projectId, assetTypeId, value: x[key] } as AddAssetRequest)
+                setCount(index + 1)
+            })
     }
 
     return (

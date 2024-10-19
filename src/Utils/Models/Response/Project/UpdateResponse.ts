@@ -1,6 +1,6 @@
 import IBaseResponse from "../../Base/IBaseResponse";
-import Asset from "../../ConCreate/Asset";
+import Project from "../../ConCreate/Project";
 
 export default interface UpdateResponse extends IBaseResponse {
-    asset: Asset;
+    project:Project;
 }

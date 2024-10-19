@@ -13,8 +13,8 @@ import DeleteResponse from "@/Utils/Models/Response/Asset/DeleteResponse"
 
 
 const fetch = new AssetFetch();
-const GetAllAssetLogic = (uniq:boolean = false) => {
-    fetch.GetAllFetch<GetAllResponse>(uniq)
+const GetAllAssetLogic = (projectId:string,uniq:boolean = false) => {
+    fetch.GetAllFetch<GetAllResponse>(projectId,uniq)
         .then(rsp => {
             console.log("AllAssetComponent - GetAll", rsp)
             if (rsp.assets !== null) {
@@ -47,7 +47,7 @@ const AddAssetLogic = async (addAsset: AddAssetRequest) => {
 const UpdateAssetLogic = async (assetTypeName: string, updateAsset: UpdateAssetRequest) => {
     const resp = await fetch.UpdateFetch<UpdateResponse,UpdateAssetRequest>(updateAsset)
     if (resp.status) {
-        store.dispatch(Update({ id: updateAsset.id, value: updateAsset.value, assetTypeId: updateAsset.id, type: assetTypeName } as Asset))
+        store.dispatch(Update(resp.asset))
         destoryModal()
     }
 }

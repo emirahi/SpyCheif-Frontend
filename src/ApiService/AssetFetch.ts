@@ -9,15 +9,10 @@ export default class AssetFetch extends BaseFetch {
         super("http://localhost:5025/api/Asset")
     }
 
-    async SearchService(searchAsset:SearchAssetRequest): Promise<SearchResponse> {
-    
-        let url = `${super.GetUrl()}/Search?uniq=${searchAsset.uniq}`
-        if (searchAsset.AssetTypeId.trim().length > 0)
-            url += `&AssetTypeId=${searchAsset.AssetTypeId}`
-        if (searchAsset.match.length > 0)
-            url += `&match=${searchAsset.match}`
-    
-        const asset = await fetch(url)
+    async SearchService(searchAsset: SearchAssetRequest): Promise<SearchResponse> {
+        
+        let url = `${super.GetUrl()}/Search`
+        const asset = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(searchAsset) })
         try {
             const data = await asset.json()
             if (asset.status == 200)
@@ -25,7 +20,7 @@ export default class AssetFetch extends BaseFetch {
             else if (asset.status == 400)
                 return data as SearchResponse
             return { assets: null, status: false, message: "Bir Sorun ile" } as SearchResponse
-    
+
         } catch (error) {
             if (asset.status == 500)
                 return { assets: null, status: false, message: "Sunucu ile ileşime geçilemiyor." } as SearchResponse
@@ -33,9 +28,12 @@ export default class AssetFetch extends BaseFetch {
         }
     }
 
-    override async GetAllFetch<GetAllResponse>(uniq: boolean = false): Promise<GetAllResponse> {
-        debugger;
-        const url = `${super.GetUrl()}?uniq=${uniq}`
+    override async GetAllFetch<GetAllResponse>(projectId: string | null = null, uniq: boolean = false): Promise<GetAllResponse> {
+
+        if (projectId === null)
+            throw new Error("");
+
+        const url = `${super.GetUrl()}?projectId=${projectId}&uniq=${uniq}`
         const asset = await fetch(url)
         try {
             const data = await asset.json()

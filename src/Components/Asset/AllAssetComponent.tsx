@@ -13,17 +13,18 @@ export const AllAssetComponent: FC = () => {
     const [hideProcess, setHideProcess] = useState<boolean>(false)
     const [uniq, setUniq] = useState<boolean>(true)
     const assets = useAppSelector(selector => selector.AssetSlice.Assets)
+    const projectId = useAppSelector(selector => selector.ProjectSlice.active?.id)
 
-    useEffect(() => { GetAllAssetLogic(uniq) }, [])
+    useEffect(() => { projectId && GetAllAssetLogic(projectId,uniq) }, [])
 
-    useEffect(() => { GetAllAssetLogic(uniq) }, [uniq])
+    useEffect(() => { projectId && GetAllAssetLogic(projectId,uniq) }, [uniq])
 
     return (
         <div>
             <div className="flex justify-between items-baseline">
                 <div className="flex gap-2 items-baseline">
-                    <Form.Check id="hideProcess" defaultChecked={uniq} onChange={() => setUniq(!uniq)} />
-                    <FormLabel htmlFor="hideProcess" className="text-lg">Unique Data</FormLabel>
+                    <Form.Check id="hideUniq" defaultChecked={uniq} onChange={() => setUniq(!uniq)} />
+                    <FormLabel htmlFor="hideUniq" className="text-lg">Unique Data</FormLabel>
                 </div>
                 <div className="flex gap-2 items-baseline">
                     <h1 className="text-lg">Veri Adeti : {assets.length}</h1>
@@ -62,7 +63,7 @@ export const AllAssetComponent: FC = () => {
                     <Button variant="outline-primary" onClick={() => createModal({ name: "addAsset", title: "Varlık Ekle" } as IModalData)}>
                         Asset Ekle
                     </Button>
-                    <Button variant="outline-primary" onClick={() => GetAllAssetLogic(uniq)}>
+                    <Button variant="outline-primary" onClick={() => projectId && GetAllAssetLogic(projectId,uniq)}>
                         <span className={`material-symbols-outlined cursor-pointer`}> refresh </span>
                     </Button>
                 </div>
