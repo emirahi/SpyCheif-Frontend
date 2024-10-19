@@ -12,7 +12,13 @@ const AssetSlice = createSlice({
     name: "AssetSlice",
     reducers: {
         Insert: (state, action: PayloadAction<Asset>) => {
+            debugger;
             state.Assets = [...state.Assets, action.payload]
+            console.log("Asset Type Id : ",action.payload.assetTypeId)
+            const searchIndex = state.Search.findIndex(search => search.assetTypeId == action.payload.assetTypeId)
+            if (searchIndex !== -1){
+                state.Search = [...state.Search,action.payload]
+            }
         },
         InsertOfList: (state, action: PayloadAction<Asset[]>) => {
             state.Assets = action.payload
@@ -24,18 +30,19 @@ const AssetSlice = createSlice({
             data.type = action.payload.type
             data.assetTypeId = action.payload.assetTypeId
             data.updatedDate = new Date().toISOString()
+            const searchIndex = state.Search.findIndex(search => search.id == action.payload.id)
+            if (searchIndex != -1){
+                state.Search[searchIndex] = data
+            }
         },
         Delete: (state, action: PayloadAction<string>) => {
-            console.log("Reducer Asset - Delete before : ", state.Assets);
             const assets = state.Assets.filter(asset => asset.id !== action.payload)
-            console.log("Reducer Asset - Delete : ", assets);
+            const search = state.Search.filter(asset => asset.id !== action.payload)
             state.Assets = assets
+            state.Search = search
         },
         DeleteOfType: (state, action: PayloadAction<string>) => {
-            debugger;
-            console.log("Reducer Asset - Delete before : ", state.Assets);
             const assets = state.Assets.filter(asset => asset.assetTypeId !== action.payload)
-            console.log("Reducer Asset - Delete : ", assets);
             state.Assets = assets
         },
         InsertSearch: (state, action: PayloadAction<Asset>) => {
