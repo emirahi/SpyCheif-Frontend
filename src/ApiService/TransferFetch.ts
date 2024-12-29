@@ -1,11 +1,11 @@
+import Config from "../Utils/Config";
 import GetAllResponse from "@/Utils/Models/Response/Transfer/GetAllResponse";
-import BaseFetch from "./Base/BaseFetch";
 import GetResponse from "@/Utils/Models/Response/Transfer/GetResponse";
 
 export default class ServiceDatabaseFetch {
     baseUrl: string;
     constructor() {
-        this.baseUrl = "http://localhost:5025/api/Transfer"
+        this.baseUrl = Config.TRANSFER_API_URL;
     }
 
     GetAllFetch = async (appName:string): Promise<GetAllResponse> => {

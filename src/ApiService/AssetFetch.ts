@@ -1,12 +1,13 @@
+
 import SearchAssetRequest from "@/Utils/Models/Request/Asset/SearchAssetRequest";
-import GetAllResponse from "../Utils/Models/Response/Asset/GetAllResponse";
 import BaseFetch from "./Base/BaseFetch";
+import Config from "../Utils/Config";
 import SearchResponse from "@/Utils/Models/Response/Asset/SearchResponse";
 
 export default class AssetFetch extends BaseFetch {
 
     constructor() {
-        super("http://localhost:5025/api/Asset")
+        super(Config.ASSET_API_URL)
     }
 
     async SearchService(searchAsset: SearchAssetRequest): Promise<SearchResponse> {

@@ -6,9 +6,9 @@
       "dom.iterable",
       "esnext"
     ],
-    "baseUrl": "./",
+    "baseUrl": "src", // Kök dizini src olarak ayarla
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["*"]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -22,7 +22,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve"
   },
   "include": [
     "src"
