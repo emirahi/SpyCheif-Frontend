@@ -4,6 +4,7 @@ import AssetTypeSlice from "./reducer/AssetTypeSlice";
 import ServiceDatabaseSlice from "./reducer/ServiceDatabaseSlice";
 import ModalSlice from "./utils/ModalSlice";
 import ProjectSlice from "./reducer/ProjectSlice";
+import TransferSlice from "./reducer/TransferSlice";
 
 const store = configureStore({
     reducer:{
@@ -11,6 +12,7 @@ const store = configureStore({
         AssetSlice,
         AssetTypeSlice,
         ServiceDatabaseSlice,
+        TransferSlice,
         ModalSlice
     }
 });

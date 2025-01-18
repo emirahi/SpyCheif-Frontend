@@ -3,6 +3,7 @@ import SearchAssetRequest from "@/Utils/Models/Request/Asset/SearchAssetRequest"
 import BaseFetch from "./Base/BaseFetch";
 import Config from "../Utils/Config";
 import SearchResponse from "@/Utils/Models/Response/Asset/SearchResponse";
+import InsertOfListResponse from "@/Utils/Models/Response/Transfer/InsertOfListResponse";
 
 export default class AssetFetch extends BaseFetch {
 
@@ -51,5 +52,24 @@ export default class AssetFetch extends BaseFetch {
         }
     }
 
+    InsertOfList = async (file: any): Promise<InsertOfListResponse> => {
+        const url = `${this.baseUrl}/InsertOfList`;
+        const formData = new FormData();
+        formData.append('file', file);
+        const rsp = await fetch(url, { method: 'POST', body: formData })
+        try {
+            const data = await rsp.json()
+            if (rsp.status === 200)
+                return data as InsertOfListResponse
+            else if (rsp.status === 400)
+                return data as InsertOfListResponse
+            return { status: false, message: "Bir sorun ile karşılaşıldı" } as InsertOfListResponse
+        } catch (error) {
+            if (rsp.status === 500)
+                return { status: false, message: "Sunucu ile ileşime geçilemiyor." } as InsertOfListResponse
+            return { status: false, message: "Bir sorun ile karşılaşıldı." } as InsertOfListResponse
+        }
+    }
 
+    
 }

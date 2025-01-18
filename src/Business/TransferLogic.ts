@@ -2,6 +2,7 @@ import GetAllResponse from "@/Utils/Models/Response/Transfer/GetAllResponse"
 import TransferFetch from "../ApiService/TransferFetch"
 import { InsertOfListTransfer, InsertTransferSelected, RemoveTransferSelected } from "../StateManager/reducer/ServiceDatabaseSlice"
 import store from "../StateManager/store"
+import { InsertOfFile, InsertOfFiles } from "../StateManager/reducer/TransferSlice"
 
 const fetch = new TransferFetch()
 const GetAllTransferLogic = async (appName: string) => {
@@ -24,4 +25,26 @@ const TransferSelectedLogic = (transfer: Object, create: boolean) => {
         store.dispatch(RemoveTransferSelected((transfer as { _id: string })._id))
 }
 
-export { GetAllTransferLogic, TransferSelectedLogic }
+const TransferFileUploadLogic =  async (file: FormData) => {
+    const rsp = await fetch.FileUpload(file)
+    try{
+        if(rsp.status){
+            store.dispatch(InsertOfFile(rsp))
+        }
+    }
+    catch{}
+}
+
+const TransferGetFilesLogic = async () => {
+    const rsp = await fetch.GetFiles()
+    try {
+        if (rsp.status) {
+            store.dispatch(InsertOfFiles(rsp.files))
+        }
+    }
+    catch { }
+
+}
+
+
+export { GetAllTransferLogic, TransferSelectedLogic, TransferGetFilesLogic, TransferFileUploadLogic as TransferFileUpload }

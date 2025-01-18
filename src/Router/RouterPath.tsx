@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { HomeComponent } from "./Base/HomeComponent";
 import { ServiceApp } from "../Components/Apps/ServiceApp";
+import FileImport from "../Components/FileImport/FileImport";
 
 
 const router = createBrowserRouter([
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
             {
                 path:"apps",
                 element:<ServiceApp/>
+            },
+            {
+                path:"file-import",
+                element:<FileImport/>
             }
         ]
     }

@@ -6,6 +6,7 @@ import IModalData from "../../StateManager/utils/IModalData";
 import { useAppSelector } from "../../StateManager/hooks";
 import { GetAllServiceDatabaseLogic } from "../../Business/ServiceDatabaseLogic";
 import { GetAllTransferLogic, TransferSelectedLogic } from "../../Business/TransferLogic";
+
 export const ServiceApp: FC = () => {
     const [hideBar, setHideBar] = useState<boolean>(false)
     const [appname, setAppName] = useState<string>("")

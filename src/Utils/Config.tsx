@@ -1,6 +1,6 @@
 
 class Config {
-    static readonly API_BASE_URL: string = 'http://localhost:5030/api';
+    static readonly API_BASE_URL: string = 'https://localhost:5030/api';
     static readonly ASSET_API_URL: string = `${this.API_BASE_URL}/asset`;
     static readonly ASSET_TYPE_API_URL: string = `${this.API_BASE_URL}/assettype`;
     static readonly PROJECT_API_URL: string = `${this.API_BASE_URL}/project`;

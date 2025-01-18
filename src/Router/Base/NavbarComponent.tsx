@@ -14,6 +14,7 @@ export const NavbarComponent: FC = () => {
                 <div className="flex gap-4 text-black">
                     <Link to={"/"} className="text-lg">Varlıklar</Link>
                     <Link to={"/apps"} className="text-lg">Uygulamalar</Link>
+                    <Link to={"/file-import"} className="text-lg">Dosya Aktar</Link>
                 </div>
             </div>
         </div>
